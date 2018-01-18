@@ -1,38 +1,122 @@
-<div class="form-group table-responsive">
-  <table class="table table-responsive">
-    <tr>
-      <th>
-       User Address
-      </th>
-      <th>
-        User Name
-      </th>
-      <th>
-        Amount
-      </th>
-      <th>
-        From Account
-      </th>
-      <th>
-        To Account
-      </th>
-    </tr>
-    <tr>
-      <td>{{request.userAddress}}</td>
-      <td>{{request.userName}}</td>
-      <td>{{request.amount}}</td>
-      <td>{{request.fromAccount}}</td>
-      <td>{{request.toAccount}}</td>
-    </tr>
-  </table>
+<!--<div class="form-group table-responsive">-->
+  <!--<table class="table table-responsive">-->
+    <!--<tr>-->
+      <!--<th>-->
+       <!--User Address-->
+      <!--</th>-->
+      <!--<th>-->
+        <!--User Name-->
+      <!--</th>-->
+      <!--<th>-->
+        <!--Amount-->
+      <!--</th>-->
+      <!--<th>-->
+        <!--From Account-->
+      <!--</th>-->
+      <!--<th>-->
+        <!--To Account-->
+      <!--</th>-->
+    <!--</tr>-->
+    <!--<tr>-->
+      <!--<td>{{request.userAddress}}</td>-->
+      <!--<td>{{request.userName}}</td>-->
+      <!--<td>{{request.amount}}</td>-->
+      <!--<td>{{request.fromAccount}}</td>-->
+      <!--<td>{{request.toAccount}}</td>-->
+    <!--</tr>-->
+  <!--</table>-->
+<!--</div>-->
+<div>{{owner}}</div>
+<div *ngIf="user">
+  <p>USER</p>
+  <p>name - {{user.name}}</p>
+  <p>annuitiesBalance - {{user.annuitiesBalance}}</p>
+  <p>longTermBalance - {{user.longTermBalance}}</p>
 </div>
+<div class="form-group form-group-lg">
+  <form #registerUser="ngForm">
+    <p class="control">
+      <input
+        [(ngModel)]="nylId"
+        class="form-control"
+        type="text"
+        placeholder="NYL ID of the participant"
+        name="nylId"
+        required
+        #sendingAmountModel="ngModel">
+      <input
+        [(ngModel)]="nameOfThePerson"
+        class="form-control"
+        type="text"
+        placeholder="Name to be registered"
+        name="nameOfThePerson"
+        required
+        #sendingAmountModel="ngModel">
+    </p>
+    <div class="field is-grouped">
+      <p class="">
+        <button
+          [disabled]="!registerUser.valid"
+          (click)="setUser()"
+          class="btn btn-primary">
+          Register New User
+        </button>
+      </p>
+    </div>
+
+
+    <form #transferMoney="ngForm">
+      <div class="row">
+        <div class="col-md-6">
+          <select [(ngModel)]="fromValue" name="fromValue" class="form-control selectpicker">
+            <option value="0">Annuity</option>
+            <option value="1">Long Term</option>
+          </select>
+        </div>
+        <div class="col-md-6">
+          <select [(ngModel)]="toValue" name="toValue" class="col-sm-6 form-control selectpicker">
+            <option value ="0">Annuity</option>
+            <option value="1">Long Term</option>
+          </select>
+        </div>
+      </div>
+      <br>
+      <p class="control">
+        <input
+          [(ngModel)]="sendingAmount"
+          class="form-control"
+          type="text"
+          placeholder="Amount to be Transferred"
+          name="amount"
+          required
+          #sendCoinModel="ngModel">
+      </p>
+      <div class="field is-grouped">
+        <p class="control">
+          <button
+            [disabled]="!transferMoney.valid"
+            (click)="makeRequest()"
+            class="btn btn-primary">
+            Request to Transfer
+          </button>
+        </p>
+      </div>
+    </form>
+
+
 <div class="field is-grouped">
   <p class="">
     <button
-      (click)="approveTransaction()"
+      (click)="approveNYL()"
       class="btn btn-primary">
-      Approve the transaction
+      Approve the transaction as NYL
     </button>
+    <button
+      (click)="approveFid()"
+      class="btn btn-primary">
+      Approve the transaction as Fidelity
+    </button>
+    <button (click)="getUser('123')">TEST</button>
   </p>
 </div>
 

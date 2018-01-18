@@ -21,11 +21,19 @@
     <form #registerUser="ngForm">
       <p class="control">
         <input
+          [(ngModel)]="nylId"
+          class="form-control"
+          type="text"
+          placeholder="NYL ID of the participant"
+          name="nylId"
+          required
+          #sendingAmountModel="ngModel">
+        <input
           [(ngModel)]="nameOfThePerson"
           class="form-control"
           type="text"
           placeholder="Name to be registered"
-          name="sendingAmount"
+          name="nameOfThePerson"
           required
           #sendingAmountModel="ngModel">
       </p>

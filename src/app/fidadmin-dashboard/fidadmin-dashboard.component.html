@@ -1,0 +1,50 @@
+<br>
+<button
+  (click)="viewAllRequests()"
+  class="btn btn-primary">
+  Populate Requests for Fidelity side
+</button>
+<div class="form-group table-responsive">
+  <table class="table table-responsive">
+    <tr>
+      <th>
+        Request ID
+      </th>
+      <th>
+        NYL-ID
+      </th>
+      <th>
+        Amount
+      </th>
+      <th>
+        From
+      </th>
+      <th>
+        To
+      </th>
+      <th>
+        Approved By NYL
+      </th>
+      <th>
+        Approved By Fidelity
+      </th>
+      <th>
+        Approve Request
+      </th>
+    </tr>
+    <tr *ngFor="let request of requestArray">
+      <td>{{request.requestId}}</td>
+      <td>{{request.NylId}}</td>
+      <td>{{request.amount}}</td>
+      <td>{{request.from}}</td>
+      <td>{{request.to}}</td>
+      <td>{{request.approvedByNYL}}</td>
+      <td>{{request.approvedByFidelity}}</td>
+      <td><button
+        (click)="approveFid(request.requestId)"
+        class="btn btn-primary">
+        Approve Request
+      </button></td>
+    </tr>
+  </table>
+</div>

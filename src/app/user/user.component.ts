@@ -18,12 +18,8 @@ export class UserComponent {
   accounts: any;
   web3: any;
   nameOfThePerson: string;
-  coins: number;
-  balance: number;
+  nylId: number;
   sendingAmount: number;
-  senderAddress: string;
-  recipientAddress: string;
-  key: string;
   status: string;
   finalUsers: any = '';
   fromValue: any;
@@ -121,7 +117,6 @@ export class UserComponent {
   }
 
   makeRequest = () => {
-    console.log("hello world");
     console.log(this.fromValue);
     console.log(this.toValue);
     let fromValue;
@@ -161,27 +156,28 @@ export class UserComponent {
 
   registerNewUser = () => {
     const nameOfThePerson = this.nameOfThePerson;
-    let meta;
-
-    this.setStatus('Initiating transaction... (please wait)');
-
-    this.Ny
-      .deployed()
-      .then(instance => {
-        meta = instance;
-        return meta.registerNewUser.sendTransaction(nameOfThePerson, {
-          from: this.account, gas: 4500000
-        });
-      })
-      .then(() => {
-        this.setStatus('Transaction complete!');
-        console.log('Transaction Complete.');
-        this.refreshBalance();
-      })
-      .catch(e => {
-        console.log(e);
-        this.setStatus('Error sending coin; see log.');
-      });
+    const nylId = this.nylId;
+    // let meta;
+    //
+    // this.setStatus('Initiating transaction... (please wait)');
+    //
+    // this.Ny
+    //   .deployed()
+    //   .then(instance => {
+    //     meta = instance;
+    //     return meta.registerNewUser.sendTransaction(nylId, nameOfThePerson, {
+    //       from: this.account, gas: 4500000
+    //     });
+    //   })
+    //   .then(() => {
+    //     this.setStatus('Transaction complete!');
+    //     console.log('Transaction Complete.');
+    //     this.refreshBalance();
+    //   })
+    //   .catch(e => {
+    //     console.log(e);
+    //     this.setStatus('Error sending coin; see log.');
+    //   });
   }
 
 

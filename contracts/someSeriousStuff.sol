@@ -13,6 +13,17 @@ contract someSeriousStuff {
   mapping(uint=>RequestTransfer) mapReqIdToReq;
   uint requestId = 1;
 
+  function getRequestCount() returns (uint)
+{
+  return requests.length;
+}
+
+  function getSingleRequest(uint requestId) returns(uint, uint, uint, uint, bool, bool)
+  {
+    RequestTransfer localRequest = mapReqIdToReq[requestId];
+    return (localRequest.NylId, localRequest.amount, localRequest.from, localRequest.to, localRequest.approvedByNYL, localRequest.approvedByFidelity);
+  }
+
   struct Account{
     string name;
     uint amount;
