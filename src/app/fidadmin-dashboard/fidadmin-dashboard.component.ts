@@ -7,24 +7,26 @@ import {SolContractService} from '../sol-contract.service';
   templateUrl: './fidadmin-dashboard.component.html',
   styleUrls: ['./fidadmin-dashboard.component.css']
 })
-export class FidadminDashboardComponent implements OnInit {
-  ngOnInit(): void {
-    //this.viewAllRequests();
-    console.log('OnInit');
-  }
+export class FidadminDashboardComponent {
 
   requestArray: any[] = [];
   constructor(private _ngZone: NgZone, public contractService: SolContractService) {
+    this.contractService.contractInitialized$.subscribe(didInit => {
+      console.log('****', didInit)
+      if (didInit) {
+          this.doSomething();
+      }
+    });
   }
 
-  @HostListener('window:load')
-  windowLoaded() {
-  this.doSomething();
-  }
+  // @HostListener('window:load')
+  // windowLoaded() {
+  // // this.doSomething();
+  // }
 
-  doSomething= () =>{
+  doSomething= () => {
     this._ngZone.run(() =>
-      this.viewAllRequests();
+      this.viewAllRequests()
     );
   }
 
@@ -40,7 +42,8 @@ export class FidadminDashboardComponent implements OnInit {
   }
 
   viewAllRequests() {
-    return this.contractService.viewAllRequests().then((result)=>{
+    return this.contractService.viewAllRequests().then((result) => {
+      console.log('****', result);
       this.requestArray = result;
     });
   }

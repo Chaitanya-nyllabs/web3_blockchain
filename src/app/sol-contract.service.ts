@@ -1,4 +1,6 @@
 import {Injectable} from '@angular/core';
+import {Observable} from 'rxjs/Observable';
+import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 const Web3 = require('web3');
 const contract = require('truffle-contract');
 const artifacts = require('../../build/contracts/someSeriousStuff.json');
@@ -15,6 +17,7 @@ export class SolContractService {
   status: string;
   request: any = '';
   contractInstance: any;
+  contractInitialized$ = new BehaviorSubject(false);
   truffleContract: any = contract(artifacts);
 
   constructor() {
@@ -40,12 +43,17 @@ export class SolContractService {
     // Bootstrap the Ny abstraction for Use.
     this.truffleContract.setProvider(this.web3.currentProvider);
 
-    this.truffleContract.deployed().then(instance => {
-      this.contractInstance = instance;
-    });
+    this.initializeContract();
 
     // until we set the logged in user account we call getAccounts to set the first account as the "logged in" user
     this.getAccounts();
+  }
+
+  initializeContract() {
+     this.truffleContract.deployed().then(instance => {
+       this.contractInstance = instance;
+       this.contractInitialized$.next(true);
+     });
   }
 
 
@@ -87,9 +95,8 @@ export class SolContractService {
 
   viewAllRequests = async () => {
     const allRequests: any[] = [];
-    console.log(this)
     const requestCount = await this.contractInstance.getRequestCount.call({from: this.account});
-    console.log('the request count is'+requestCount)
+    console.log('the request count is', +requestCount);
     for (let requestId = 1; requestId <= requestCount; requestId++) {
       const request = await this.contractInstance.getSingleRequest.call(requestId, {from: this.account});
       allRequests.push({
