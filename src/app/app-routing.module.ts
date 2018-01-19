@@ -6,6 +6,7 @@ import {UserComponent} from './user/user.component';
 import {LoginComponent} from './login/login.component';
 import {NYLAdminDashboardComponent} from './NYLadmin-dashboard/NYLadmin-dashboard.component';
 import {FidadminDashboardComponent} from './fidadmin-dashboard/fidadmin-dashboard.component';
+import {UserRequestComponent} from './user-request/user-request.component';
 
 
 const routes: Routes = [
@@ -15,6 +16,7 @@ const routes: Routes = [
   {path: 'login', component: LoginComponent},
   {path: 'nyl_admin', component: NYLAdminDashboardComponent},
   {path: 'fid_admin', component: FidadminDashboardComponent},
+  //{path: '/:id', component: UserRequestComponent}
 ];
 
 @NgModule({

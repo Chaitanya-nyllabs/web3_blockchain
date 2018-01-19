@@ -4,7 +4,11 @@ contract someSeriousStuff {
 
   address public owner;
   //address[] public clients;
+
+  uint[] public clientArray;
   mapping(uint=>User) clients;
+
+
   mapping(string=>uint) someTest;
 
 
@@ -14,9 +18,20 @@ contract someSeriousStuff {
   uint requestId = 1;
 
   function getRequestCount() returns (uint)
-{
+  {
   return requests.length;
 }
+
+  function getClientCount() returns (uint)
+  {
+    return clientArray.length;
+  }
+
+  function getSingleClientId(uint id) returns (uint)
+  {
+    return clientArray[id];
+  }
+
 
   function getSingleRequest(uint requestId) returns(uint, uint, uint, uint, bool, bool)
   {
@@ -56,6 +71,7 @@ contract someSeriousStuff {
     clients[NylId].accounts[0] = Account({name:'annuity', amount:100000});
     clients[NylId].accounts[1] = Account({name:'long term', amount:5000});
     someTest[_name] = NylId;
+    clientArray.push(NylId);
     return true;
   }
 

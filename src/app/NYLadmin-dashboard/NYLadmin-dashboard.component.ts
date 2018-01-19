@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, NgZone} from '@angular/core';
 import {SolContractService} from '../sol-contract.service';
 
 
@@ -9,17 +9,24 @@ import {SolContractService} from '../sol-contract.service';
 })
 export class NYLAdminDashboardComponent {
   requestArray: any[] = [];
-
-  constructor(private contractService: SolContractService) {
-  }
-  approveNYL(requestId) {
-    return this.contractService.approveRequestByNYL(requestId, true).then(() => {
-      return true;
+  constructor(private _ngZone: NgZone, public contractService: SolContractService) {
+    this.contractService.contractInitialized$.subscribe(didInit => {
+      console.log('****', didInit)
+      if (didInit) {
+        this.doSomething();
+      }
     });
   }
 
-  approveFid() {
-    return this.contractService.approveRequestByFidelity(1, true).then(() => {
+  doSomething= () => {
+    this._ngZone.run(() =>
+      this.viewAllRequests()
+    );
+  }
+
+  approveNYL(requestId) {
+    return this.contractService.approveRequestByNYL(requestId, true).then(() => {
+      this.viewAllRequests();
       return true;
     });
   }

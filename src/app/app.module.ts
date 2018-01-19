@@ -10,6 +10,7 @@ import { LoginComponent } from './login/login.component';
 import {SolContractService} from './sol-contract.service';
 import { NYLAdminDashboardComponent } from './NYLadmin-dashboard/NYLadmin-dashboard.component';
 import { FidadminDashboardComponent } from './fidadmin-dashboard/fidadmin-dashboard.component';
+import { UserRequestComponent } from './user-request/user-request.component';
 
 
 @NgModule({
@@ -19,7 +20,8 @@ import { FidadminDashboardComponent } from './fidadmin-dashboard/fidadmin-dashbo
     UserComponent,
     LoginComponent,
     NYLAdminDashboardComponent,
-    FidadminDashboardComponent
+    FidadminDashboardComponent,
+    UserRequestComponent
   ],
   imports: [
     BrowserModule,

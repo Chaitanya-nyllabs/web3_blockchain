@@ -38,6 +38,10 @@ export class OwnerComponent {
     const id = this.nylId;
     return this.contractService.registerNewUser(id, name).then(res => {
       console.log(res);
+      this.contractService.viewAllUsers().then(abc =>{
+        console.log('reached somewhere');
+        console.log(abc);
+      })
       return res;
     });
   }

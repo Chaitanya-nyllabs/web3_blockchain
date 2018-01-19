@@ -1,9 +1,3 @@
-<br>
-<button
-  (click)="viewAllRequests()"
-  class="btn btn-primary">
-  Populate Requests for Fidelity side
-</button>
 <div class="form-group table-responsive">
   <table class="table table-responsive">
     <tr>
@@ -38,9 +32,10 @@
       <td>{{request.amount}}</td>
       <td>{{request.from}}</td>
       <td>{{request.to}}</td>
-      <td>{{request.approvedByNYL}}</td>
-      <td>{{request.approvedByFidelity}}</td>
+      <td><input type="checkbox" [disabled]="true" [(ngModel)]="request.approvedByNYL"/></td>
+      <td><input type="checkbox" [disabled]="true" [(ngModel)]="request.approvedByFidelity"/></td>
       <td><button
+        [disabled]="request.approvedByFidelity"
         (click)="approveFid(request.requestId)"
         class="btn btn-primary">
         Approve Request

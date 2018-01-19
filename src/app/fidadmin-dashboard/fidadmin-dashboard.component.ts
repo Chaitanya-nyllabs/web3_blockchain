@@ -18,31 +18,23 @@ export class FidadminDashboardComponent {
       }
     });
   }
-
-  // @HostListener('window:load')
-  // windowLoaded() {
-  // // this.doSomething();
-  // }
-
   doSomething= () => {
     this._ngZone.run(() =>
       this.viewAllRequests()
     );
   }
 
-  // constructor(private contractService: SolContractService) {
-  //   this.viewAllRequests();
-  //
-  // }
 
   approveFid(requestId) {
     return this.contractService.approveRequestByFidelity(requestId, true).then(() => {
+      this.viewAllRequests();
       return true;
     });
   }
 
   viewAllRequests() {
     return this.contractService.viewAllRequests().then((result) => {
+      this.requestArray = [];
       console.log('****', result);
       this.requestArray = result;
     });

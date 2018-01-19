@@ -103,13 +103,42 @@ export class SolContractService {
         requestId: requestId,
         NylId: request[0],
         amount: request[1],
-        from: request[2],
-        to: request[3],
+        from: this.checkRequestCode(request[2]),
+        to: this.checkRequestCode(request[3]),
         approvedByNYL: request[4],
         approvedByFidelity: request[5]
       });
     }
     return allRequests;
+  }
+  viewAllUsers = async () => {
+    let allUsers: any[] = [];
+    const nylIdArray: any[] = [];
+    const lengthOfClientArray = await this.contractInstance.getClientCount.call({from: this.account});
+    for(let i = 0; i < lengthOfClientArray; i++)
+    {
+      const NYLID = await this.contractInstance.getSingleClientId.call(i, {from: this.account});
+      nylIdArray.push(NYLID);
+    }
+    console.log('the request count is', +typeof nylIdArray);
+    for (let i = 0; i < nylIdArray.length; i++) {
+      const request = await this.contractInstance.viewUser.call(nylIdArray[i], {from: this.account});
+      allUsers.push({
+        nylId: nylIdArray[i],
+       name: request[0],
+        annuityBalance: request[2].toString(),
+        longTermBalance: request[4].toString()
+      });
+    }
+    return allUsers;
+  }
+
+
+  checkRequestCode(requestCode: number) {
+    if (requestCode === 0) {
+      return 'Annuities';
+    }
+    return 'Long Term';
   }
 
   approveRequestByNYL(requestId: number, approved: boolean) {
