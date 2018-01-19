@@ -1,0 +1,56 @@
+<div class="modal fade" id="myModal" role="dialog">
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Request Transfer of Funds</h4>
+      </div>
+      <div class="modal-body">
+        <form #transferMoney="ngForm">
+          <div class="row">
+            <div class="col-md-6">
+              <select [(ngModel)]="fromValue" name="fromValue" class="form-control selectpicker">
+                <option value="0">Annuity</option>
+                <option value="1">Long Term</option>
+              </select>
+            </div>
+            <div class="col-md-6">
+              <select [(ngModel)]="toValue" name="toValue" class="col-sm-6 form-control selectpicker">
+                <option value ="0">Annuity</option>
+                <option value="1">Long Term</option>
+              </select>
+            </div>
+          </div>
+          <br>
+          <p class="control">
+            <input
+              [(ngModel)]="sendingAmount"
+              class="form-control"
+              type="text"
+              placeholder="Amount to be Transferred"
+              name="amount"
+              required
+              #sendCoinModel="ngModel">
+          </p>
+          <div class="field is-grouped">
+            <p class="control">
+              <button
+                #closeBtn
+                [disabled]="!transferMoney.valid"
+                (click)="requestTransfer()"
+                data-dismiss="modal"
+                type="button"
+                class="btn btn-primary">
+                Request to Transfer
+              </button>
+            </p>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>

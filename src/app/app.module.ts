@@ -11,6 +11,7 @@ import {SolContractService} from './sol-contract.service';
 import { NYLAdminDashboardComponent } from './NYLadmin-dashboard/NYLadmin-dashboard.component';
 import { FidadminDashboardComponent } from './fidadmin-dashboard/fidadmin-dashboard.component';
 import { UserRequestComponent } from './user-request/user-request.component';
+import { RequestTransferModalComponent } from './request-transfer-modal/request-transfer-modal.component';
 
 
 @NgModule({
@@ -21,7 +22,8 @@ import { UserRequestComponent } from './user-request/user-request.component';
     LoginComponent,
     NYLAdminDashboardComponent,
     FidadminDashboardComponent,
-    UserRequestComponent
+    UserRequestComponent,
+    RequestTransferModalComponent
   ],
   imports: [
     BrowserModule,
